@@ -1,6 +1,9 @@
 # Silverstripe Honeypot SpamProtection Module
 
-[![Version](https://img.shields.io/packagist/v/innoweb/silverstripe-spamprotection-honeypot.svg?style=flat-square)](https://packagist.org/packages/innoweb/silverstripe-spamprotection-honeypot)
+[![Version](https://img.shields.io/packagist/v/innoweb/silverstripe-spamprotection-honeypot.svg?color=darkorange&style=flat-square)](https://packagist.org/packages/innoweb/silverstripe-spamprotection-honeypot)
+[![Silverstripe](https://img.shields.io/static/v1?label=Silverstripe&message=^4.10&color=blue&style=flat-square)](composer.json)
+[![Downloads](https://img.shields.io/packagist/dt/innoweb/silverstripe-spamprotection-honeypot?color=lightseagreen&style=flat-square)](https://packagist.org/packages/innoweb/silverstripe-spamprotection-honeypot)
+[![Issues](https://img.shields.io/github/issues-raw/xini/silverstripe-spamprotection-honeypot?color=darkred&style=flat-square)](https://github.com/xini/silverstripe-spamprotection-honeypot/issues)
 [![License](https://img.shields.io/packagist/l/innoweb/silverstripe-spamprotection-honeypot.svg?style=flat-square)](license.md)
 
 ## Overview
