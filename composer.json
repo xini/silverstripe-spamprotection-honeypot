@@ -31,5 +31,10 @@
         "psr-4": {
             "Innoweb\\SpamProtectionHoneypot\\Tests\\": "tests"
         }
-    }
+    },
+    "extra": {
+        "expose": [
+            "client/dist"
+        ]
+	}
 }
