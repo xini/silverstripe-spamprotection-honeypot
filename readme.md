@@ -1,18 +1,18 @@
-# SpamProtection Honeypot Module
+# Silverstripe Honeypot SpamProtection Module
 
 [![Version](http://img.shields.io/packagist/v/innoweb/silverstripe-spamprotection-honeypot.svg?style=flat-square)](https://packagist.org/packages/innoweb/silverstripe-spamprotection-honeypot)
 [![License](http://img.shields.io/packagist/l/innoweb/silverstripe-spamprotection-honeypot.svg?style=flat-square)](license.md)
 
 ## Overview
 
-Provides Honeypot spam protection for SilverStripe CMS.
+Provides invisible honeypot spam protection for Silverstripe CMS.
 
 Creates form fields hidden from users that invalidate submission if the contained data has been tampered with. Also invalidates submissions that respond too quickly.
 
 ## Requirements
 
-- SilverStripe Framework 4+
-- SilverStripe [SpamProtection](https://github.com/silverstripe/silverstripe-spamprotection) 3+.
+- Silverstripe Framework 4.10+
+- Silverstripe [SpamProtection](https://github.com/silverstripe/silverstripe-spamprotection) 3+.
 
 ## Installation
 
