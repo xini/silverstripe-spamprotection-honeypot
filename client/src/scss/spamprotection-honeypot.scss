@@ -1,0 +1,23 @@
+.field.hpsp {
+    margin: 0;
+
+    .field {
+        margin: 0;
+
+        &.hpspi {
+            // Visually hiding content see https://webaim.org/techniques/css/invisiblecontent/
+            position: absolute !important;
+            height: 1px;
+            width: 1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+            clip: rect(1px, 1px, 1px, 1px);
+            clip-path: inset(50%);
+            white-space: nowrap; /* added line */
+        }
+        &.hpsph {
+            display: none;
+        }
+    }
+}

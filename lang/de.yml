@@ -1,0 +1,7 @@
+de:
+  Innoweb\SpamProtectionHoneypot\FormField\HoneypotField:
+    DefaultValue: "Bitte sein lassen."
+    CHECK: 'Überprüfen'
+    TIMESTAMP: 'Wie spät ist es?'
+    CONTROL: 'Kontrolle'
+    SPAM: 'Ihre Nachricht wurde abgelehnt weil sie als Spam behandelt wurde.'

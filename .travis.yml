@@ -1,0 +1,21 @@
+language: php
+
+matrix:
+  include:
+    - php: 7.4
+      env: DB=MYSQL
+    - php: 8.0
+      env: DB=MYSQL
+
+before_script:
+  - phpenv rehash
+
+  - composer validate
+  - composer require --no-update silverstripe/recipe-cms:4.10.x-dev
+  - composer install --prefer-dist --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
+
+script:
+  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+
+after_script:
+  - php vendor/bin/ocular code-coverage:upload --format=php-clover coverage.clover

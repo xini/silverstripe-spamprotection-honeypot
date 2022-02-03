@@ -1,0 +1,7 @@
+fr:
+  Innoweb\SpamProtectionHoneypot\FormField\HoneypotField:
+    DefaultValue: "Veuillez laisser tel quel."
+    CHECK: 'Vérifier'
+    TIMESTAMP: 'Quelle heure est-il?'
+    CONTROL: 'Contrôle'
+    SPAM: 'Votre message a été rejeté car il a été traité comme spam.'

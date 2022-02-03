@@ -1,0 +1,8 @@
+en:
+  Innoweb\SpamProtectionHoneypot\FormField\HoneypotField:
+    DefaultValue: 'Please leave this as is.'
+    CHECK: 'Check'
+    TIMESTAMP: 'What''s the time?'
+    CONTROL: 'Control'
+    SPAM: 'Your submission has been rejected because it was treated as spam.'
+
