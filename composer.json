@@ -1,6 +1,6 @@
 {
     "name": "innoweb/silverstripe-spamprotection-honeypot",
-    "description": "Provides invisible honeypot spam protection for SilverStripe CMS.",
+    "description": "Provides invisible honeypot spam protection for Silverstripe CMS.",
     "type": "silverstripe-vendormodule",
     "license": "BSD-3-Clause",
     "keywords": [
