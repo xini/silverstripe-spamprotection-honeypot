@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Innoweb\\SpamProtectionHoneypot\\": "src"
+            "Innoweb\\SpamProtectionHoneypot\\": "src",
             "Innoweb\\SpamProtectionHoneypot\\Tests\\": "tests"
         }
     },
