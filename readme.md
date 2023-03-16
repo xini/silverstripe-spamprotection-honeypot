@@ -14,8 +14,10 @@ Creates form fields hidden from users that invalidate submission if the containe
 
 ## Requirements
 
-- Silverstripe Framework 4.10+
-- Silverstripe [SpamProtection](https://github.com/silverstripe/silverstripe-spamprotection) 3+.
+- Silverstripe Framework 5
+- Silverstripe [SpamProtection](https://github.com/silverstripe/silverstripe-spamprotection) 4.
+
+Note: this version is compatible with Silverstripe 5. For Silverstripe 4, please see the [1 release line](https://github.com/xini/silverstripe-spamprotection-honeypot/tree/1).
 
 ## Installation
 
