@@ -2,6 +2,8 @@
 
 namespace Innoweb\SpamProtectionHoneypot\FormField;
 
+use Override;
+use SilverStripe\Core\Validation\ValidationResult;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextareaField;
@@ -45,22 +47,22 @@ class HoneypotField extends CompositeField
     ) {
 
         // Set field title
-        $title = isset($title) && strlen($title) > 0 ? $title : _t(__CLASS__ . '.CHECK', 'Check');
+        $title = isset($title) && strlen($title) > 0 ? $title : _t(self::class . '.CHECK', 'Check');
 
 
         // naming with underscores to prevent values from actually being saved somewhere
         $children = FieldList::create(
             $this->valueField = TextField::create(
-                "{$name}[_val]",
+                $name . '[_val]',
                 $title
             ),
             $this->timestampField = TextField::create(
-                "{$name}[_ts]",
-                _t(__CLASS__ . '.TIMESTAMP', "What's the time?")
+                $name . '[_ts]',
+                _t(self::class . '.TIMESTAMP', "What's the time?")
             ),
             $this->controlField = TextareaField::create(
-                "{$name}[_ctrl]",
-                _t(__CLASS__ . '.CONTROL', 'Control')
+                $name . '[_ctrl]',
+                _t(self::class . '.CONTROL', 'Control')
             )
         );
         parent::__construct($children);
@@ -81,7 +83,7 @@ class HoneypotField extends CompositeField
         $this->controlField->addExtraClass('hpsph');
 
         // set field value
-        $value = isset($value) && strlen($value) > 0 ? $value : _t(__CLASS__ . '.DefaultValue', 'Please leave this as is.');
+        $value = isset($value) && strlen($value) > 0 ? $value : _t(self::class . '.DefaultValue', 'Please leave this as is.');
         $this->setValue($value);
 
         // set field name
@@ -97,6 +99,7 @@ class HoneypotField extends CompositeField
      *
      * @return string
      */
+    #[Override]
     public function Field($properties = [])
     {
         Requirements::css('innoweb/silverstripe-spamprotection-honeypot:client/dist/css/spamprotection-honeypot.css');
@@ -110,27 +113,27 @@ class HoneypotField extends CompositeField
      *
      * @return bool
      */
-    public function validate($validator)
+    #[Override]
+    public function validate(): ValidationResult
     {
+        $result = ValidationResult::create();
         $submission = $this->getForm()->getController()->getRequest()->postVar($this->getName());
         if (!$submission || !is_array($submission)) {
-            $validator->validationError(
-                null,
+            $result->addError(
                 _t(
-                    __CLASS__ . '.SPAM',
+                    self::class . '.SPAM',
                     'Your submission has been rejected because it was treated as spam.'
-                ),
-                'error'
+                )
             );
-            return false;
+            return $result;
         }
 
-        $defaultValue = _t(__CLASS__ . '.DefaultValue', 'Please leave as is.');
+        $defaultValue = _t(self::class . '.DefaultValue', 'Please leave this as is.');
         $timeLimit = $this->config()->time_limit;
 
-        $value = isset($submission['_val']) ? $submission['_val'] : null;
+        $value = $submission['_val'] ?? null;
         $timestamp = isset($submission['_ts']) ? (int) $submission['_ts'] : null;
-        $control = isset($submission['_ctrl']) ? $submission['_ctrl'] : null;
+        $control = $submission['_ctrl'] ?? null;
 
         if (
             // pre-set value has been modified
@@ -140,37 +143,39 @@ class HoneypotField extends CompositeField
             // empty field has been filled
             || (isset($control) && strlen($control) > 0)
         ) {
-            $validator->validationError(
-                null,
+            $result->addError(
                 _t(
-                    __CLASS__ . '.SPAM',
+                    self::class . '.SPAM',
                     'Your submission has been rejected because it was treated as spam.'
-                ),
-                'error'
+                )
             );
-            return false;
+            return $result;
         }
 
-        return true;
+        return $result;
     }
 
+    #[Override]
     public function setTitle($title)
     {
         $this->valueField->setTitle($title);
         return parent::setTitle($title);
     }
 
+    #[Override]
     public function setValue($value, $data = null)
     {
         $this->valueField->setValue($value);
         return $this;
     }
 
+    #[Override]
     public function getColumnCount()
     {
         return null;
     }
 
+    #[Override]
     public function getTag()
     {
         return 'div';
@@ -183,6 +188,7 @@ class HoneypotField extends CompositeField
      *
      * @return string
      */
+    #[Override]
     public function Type()
     {
         return 'hpsp';

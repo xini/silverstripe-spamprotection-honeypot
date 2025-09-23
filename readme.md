@@ -14,10 +14,8 @@ Creates form fields hidden from users that invalidate submission if the containe
 
 ## Requirements
 
-- Silverstripe Framework 5
-- Silverstripe [SpamProtection](https://github.com/silverstripe/silverstripe-spamprotection) 4.
-
-Note: this version is compatible with Silverstripe 5. For Silverstripe 4, please see the [1 release line](https://github.com/xini/silverstripe-spamprotection-honeypot/tree/1).
+- Silverstripe Framework 6
+- Silverstripe [SpamProtection](https://github.com/silverstripe/silverstripe-spamprotection) 5
 
 ## Installation
 
@@ -73,8 +71,8 @@ You can also change the default text used in the value field, overriding the tra
 
 ```yaml
 en:
-    Innoweb\SpamProtectionHoneypot\FormField\HoneypotField:
-        DefaultValue: 'Some text that should not be touched.'
+  Innoweb\SpamProtectionHoneypot\FormField\HoneypotField:
+    DefaultValue: 'Some text that should not be touched.'
 ```
 
 This defaults to `'Please leave this as is.'`.

@@ -2,14 +2,15 @@
 
 namespace Innoweb\SpamProtectionHoneypot\Tests;
 
+use Override;
 use SilverStripe\Control\Controller;
 use SilverStripe\Dev\TestOnly;
 use SilverStripe\Forms\EmailField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FormAction;
-use SilverStripe\Forms\RequiredFields;
 use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\Validation\RequiredFieldsValidator;
 use SilverStripe\View\SSViewer;
 
 /**
@@ -20,7 +21,7 @@ class HoneypotFieldTestController extends Controller implements TestOnly
     public function __construct()
     {
         parent::__construct();
-        if (Controller::has_curr()) {
+        if (Controller::curr()) {
             $this->setRequest(Controller::curr()->getRequest());
         }
     }
@@ -33,6 +34,7 @@ class HoneypotFieldTestController extends Controller implements TestOnly
 
     protected $template = 'BlankPage';
 
+    #[Override]
     public function Link($action = null)
     {
         return Controller::join_links(
@@ -45,20 +47,9 @@ class HoneypotFieldTestController extends Controller implements TestOnly
 
     public function Form()
     {
-        $form = new Form(
-            $this,
-            'Form',
-            new FieldList(
-                new EmailField('Email'),
-                new TextField('SomeField')
-            ),
-            new FieldList(
-                FormAction::create('doSubmit'),
-            ),
-            new RequiredFields(
-                'Email'
-            )
-        );
+        $form = Form::create($this, 'Form', FieldList::create(EmailField::create('Email'), TextField::create('SomeField')), FieldList::create(FormAction::create('doSubmit')), new RequiredFieldsValidator(
+            'Email'
+        ));
         $form->disableSecurityToken(); // Disable CSRF protection for easier form submission handling
         $form->enableSpamProtection();
 
@@ -71,8 +62,9 @@ class HoneypotFieldTestController extends Controller implements TestOnly
         return $this->redirectBack();
     }
 
+    #[Override]
     public function getViewer($action = null)
     {
-        return new SSViewer('BlankPage');
+        return SSViewer::create('BlankPage');
     }
 }

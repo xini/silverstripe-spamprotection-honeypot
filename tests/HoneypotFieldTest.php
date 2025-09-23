@@ -4,6 +4,7 @@ namespace Innoweb\SpamProtectionHoneypot\Tests;
 
 use Innoweb\SpamProtectionHoneypot\FormField\HoneypotField;
 use Innoweb\SpamProtectionHoneypot\SpamProtector\HoneypotSpamProtector;
+use Override;
 use SilverStripe\Control\Controller;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\FunctionalTest;
@@ -18,13 +19,15 @@ class HoneypotFieldTest extends FunctionalTest
         HoneypotFieldTestController::class,
     ];
 
+    #[Override]
     public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
 
-        Config::inst()->update(FormSpamProtectionExtension::class, 'default_spam_protector', HoneypotSpamProtector::class);
+        Config::inst()->set(FormSpamProtectionExtension::class, 'default_spam_protector', HoneypotSpamProtector::class);
     }
 
+    #[Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -40,9 +43,9 @@ class HoneypotFieldTest extends FunctionalTest
         $form = $this->getForm();
 
         $fields = $form->Fields();
-        $this->assertEquals(_t(HoneypotField::class . '.DefaultValue', 'Please leave this as is.'), $fields->dataFieldByName('Captcha[_val]')->Value());
-        $this->assertIsInt($fields->dataFieldByName('Captcha[_ts]')->Value());
-        $this->assertEmpty($fields->dataFieldByName('Captcha[_ctrl]')->Value());
+        $this->assertEquals(_t(HoneypotField::class . '.DefaultValue', 'Please leave this as is.'), $fields->dataFieldByName('Captcha[_val]')->getValue());
+        $this->assertIsInt($fields->dataFieldByName('Captcha[_ts]')->getValue());
+        $this->assertEmpty($fields->dataFieldByName('Captcha[_ctrl]')->getValue());
 
         $time = time();
         $requestData = [
@@ -51,21 +54,13 @@ class HoneypotFieldTest extends FunctionalTest
         ];
         $form->loadDataFrom($requestData);
 
-        $this->assertEquals('val1', $fields->dataFieldByName('key1')->Value());
-        $this->assertEquals($time, $fields->dataFieldByName('Captcha[_ts]')->Value());
-
+        $this->assertEquals('val1', $fields->dataFieldByName('key1')->getValue());
+        $this->assertEquals($time, $fields->dataFieldByName('Captcha[_ts]')->getValue());
     }
 
     public function getForm(): Form
     {
-        $form = new Form(
-            Controller::curr(),
-            'Form',
-            new FieldList(
-                new TextField('key1'),
-            ),
-            new FieldList()
-        );
+        $form = Form::create(Controller::curr(), 'Form', FieldList::create(TextField::create('key1')), FieldList::create());
         $form->enableSpamProtection();
         return $form;
     }
